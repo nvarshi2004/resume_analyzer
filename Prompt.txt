@@ -1,0 +1,213 @@
+You are a senior full-stack developer and software architect.
+
+Build a complete web application called **"Resume Gap Analyzer"** using:
+
+* Backend: Node.js with Express
+* Frontend: HTML, CSS, JavaScript (no frameworks)
+* Add PDF upload support
+* No external APIs (NO ChatGPT, NO paid services)
+* Use rule-based ATS-like logic
+
+---
+
+🎯 APPLICATION GOAL:
+The app should take:
+
+* Resume (TEXT or PDF upload)
+* Job Description (TEXT)
+
+And output:
+
+* Match Score (%)
+* Fit Label (Strong / Moderate / Weak)
+* Missing Skills
+* Weaknesses
+* Suggestions for improvement
+
+---
+
+📁 PROJECT STRUCTURE:
+
+resume-analyzer/
+│── server.js
+│── analyzer/
+│   ├── extractKeywords.js
+│   ├── matchScore.js
+│   ├── weaknesses.js
+│   └── suggestions.js
+│
+│── public/
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+
+---
+
+⚙️ BACKEND REQUIREMENTS:
+
+1. Use Express server on port 5000
+2. Enable CORS and JSON parsing
+3. Add file upload support using multer
+4. Use pdf-parse to extract text from uploaded PDF
+
+Install:
+
+* express
+* cors
+* multer
+* pdf-parse
+
+---
+
+📌 ENDPOINTS:
+
+1. POST /analyze
+
+   * Input: resume text + job description
+
+2. POST /upload
+
+   * Accept PDF file
+   * Extract text using pdf-parse
+   * Return extracted text
+
+---
+
+🧠 ANALYSIS LOGIC:
+
+1. Keyword Extraction:
+
+* Lowercase
+* Remove special characters
+* Remove stopwords
+* Return unique keywords
+
+2. Match Score:
+
+* (matched / JD keywords) * 100
+
+3. Weakness Detection:
+
+* Missing skills
+* If missing > 50% → "Low Relevance"
+* If no numbers (%) → "No Metrics"
+
+4. Suggestions:
+
+* Missing Skills → "Add relevant projects"
+* No Metrics → "Add quantified results"
+* Low Relevance → "Customize resume"
+
+5. Fit Label:
+
+* 80+ → Strong
+* 60–79 → Moderate
+* <60 → Weak
+
+---
+
+📤 RESPONSE FORMAT:
+
+{
+"matchScore": number,
+"fit": "Strong Fit / Moderate Fit / Weak Fit",
+"weaknesses": [
+{ "type": "...", "details": ["..."] }
+],
+"suggestions": ["..."]
+}
+
+---
+
+🎨 FRONTEND REQUIREMENTS:
+
+UI should include:
+
+1. Title: Resume Gap Analyzer
+
+2. Resume Input:
+
+   * Textarea
+   * OR PDF Upload input
+
+3. Job Description textarea
+
+4. Buttons:
+
+   * Upload PDF
+   * Analyze
+
+---
+
+⚡ FRONTEND LOGIC:
+
+1. If user uploads PDF:
+
+   * Send file to /upload
+   * Receive extracted text
+   * Auto-fill resume textarea
+
+2. On Analyze:
+
+   * Send resume + JD to /analyze
+   * Display results
+
+---
+
+📊 OUTPUT DISPLAY:
+
+* Match Score
+* Fit Label
+* Weaknesses list
+* Suggestions list
+
+---
+
+✨ BONUS FEATURES:
+
+* Copy Results Button
+* Loading indicator ("Analyzing...")
+* Clean UI with card layout
+
+---
+
+🚫 CONSTRAINTS:
+
+* No external APIs
+* No frontend frameworks
+* Keep modular code
+
+---
+
+📦 OUTPUT REQUIRED:
+
+Generate FULL WORKING CODE for:
+
+* server.js (with multer + pdf-parse)
+* analyzer modules
+* index.html (with file upload)
+* style.css
+* script.js (handle upload + analyze)
+
+---
+
+🎯 FINAL GOAL:
+
+Run:
+
+1. npm install express cors multer pdf-parse
+2. node server.js
+3. Open index.html
+
+User can:
+
+* Upload resume PDF → auto text extraction
+* Analyze against JD → see gaps + suggestions
+
+---
+
+Write clean, production-quality code
+
+
+
+git hub: https://github.com/nvarshi2004/resume_analyzer.git
